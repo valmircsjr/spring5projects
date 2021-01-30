@@ -4,6 +4,7 @@ import com.vcsjr.SpringProfileExample.services.HelloWorldFactory;
 import com.vcsjr.SpringProfileExample.services.HelloWorldService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 
 @Configuration
@@ -15,25 +16,25 @@ public class HelloConfig {
     }
 
     @Bean
-    @Profile({"English", "default"})
+    @Profile({"english", "default"})
+    @Primary
     public HelloWorldService HelloWorldServiceEnglishImpl(HelloWorldFactory factory) {
         return factory.createHelloService("en");
     }
 
     @Bean
-    @Profile("Spanish")
+    @Profile("spanish")
+    @Primary
     public HelloWorldService HelloWorldServiceSpanishImpl(HelloWorldFactory factory) {
         return factory.createHelloService("es");
     }
 
     @Bean
-    @Profile("German")
     public HelloWorldService HelloWorldServiceGermanImpl(HelloWorldFactory factory) {
         return factory.createHelloService("ge");
     }
 
-    @Bean
-    @Profile("German")
+    @Bean(name = "french")
     public HelloWorldService HelloWorldServiceFranchImpl(HelloWorldFactory factory) {
         return factory.createHelloService("fh");
     }
